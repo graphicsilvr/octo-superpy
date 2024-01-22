@@ -1,0 +1,7 @@
+id, product_name, name, buy_date, buy_price, expiration_date, sell_date, sell_price, quantity
+1, apple, Granny Smith, 2022-01-01, 0.50, 2022-01-10, 2022-01-05, 0.75, 100
+2, banana, Cavendish, 2022-01-01, 0.25, 2022-01-05, 2022-01-02, 0.35, 150
+3, carrot, Nantes, 2022-01-01, 0.75, 2022-01-15, 2022-01-03, 1.00, 75
+4, apple, Red Delicious, 2022-01-02, 0.55, 2022-01-12, 2022-01-06, 0.80, 90
+5, banana, Lady Finger, 2022-01-02, 0.30, 2022-01-06, 2022-01-03, 0.45, 120
+6, carrot, Chantenay, 2022-01-02, 0.80, 2022-01-16, 2022-01-04, 1.10, 60

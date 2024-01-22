@@ -1,0 +1,27 @@
+{
+    "apple": {
+        "count": 2,
+        "buy_price": 0.5,
+        "expiration_date": "0.75"
+    },
+    "banana": {
+        "count": 2,
+        "buy_price": 0.25,
+        "expiration_date": "0.40"
+    },
+    "carrot": {
+        "count": 2,
+        "buy_price": 0.75,
+        "expiration_date": "1.00"
+    },
+    "Test Product": {
+        "count": 10,
+        "buy_price": 10.0,
+        "expiration_date": "2024-01-01"
+    },
+    "Apple": {
+        "count": 1,
+        "buy_price": 0.5,
+        "expiration_date": "2024-01-01"
+    }
+}
