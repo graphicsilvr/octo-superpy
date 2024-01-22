@@ -28,6 +28,11 @@ SuperPy supports the following commands for managing your inventory:
 - `buy`: Add a new product to the inventory.
 - `sell`: Execute a sale of a product from the inventory.
 - `report`: Generate reports detailing the current inventory status.
+- `export`: Export your reports into JSON or XML formats for further analysis or record-keeping. For example, use `export --type json --file path/to/report.json` to export a report in JSON format.
+- `visualize`: Display visualizations of your inventory data to get a quick graphical overview of sales trends over time. This feature helps in understanding the data at a glance and making informed decisions.
+
+These features enhance SuperPy’s functionality, making it a comprehensive tool for inventory management with the added benefits of data export and visualization for a more insightful user experience.
+
 
 ## Options
 
@@ -76,30 +81,3 @@ pytest
 ## License
 
 SuperPy is made available under the MIT License. For more details, see the `LICENSE` file in the repository.
-
-# File Structure
-
-Superpy/
-│
-├── super.py                 # Main script for the CLI application
-│
-├── modules/                 # Python modules directory
-│   ├── inventory.py         # Manages inventory operations
-│   ├── reporting.py         # Generates various reports
-│   └── time_management.py   # Handles date and time operations
-│
-├── data/                    # Data storage directory
-│   ├── bought.csv           # Tracks purchased items
-│   └── sold.csv             # Tracks sold items
-│
-├── tests/                   # Test scripts directory
-│   ├── test_inventory.py    # Tests for inventory module
-│   ├── test_reporting.py    # Tests for reporting module
-│   └── test_time_management.py # Tests for time management module
-│
-├── docs/                    # Documentation directory
-│   ├── USAGE.md             # Guide for using the CLI application
-│   └── REPORT.md            # Technical project report
-│
-├── .gitignore               # Untracked files to ignore
-└── README.md                # Project overview and setup instructions
