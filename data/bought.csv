@@ -1,4 +1,4 @@
-d,product,name,buy_price,sell_price,date,time,report_price,expiration_date,quantity
+id,product,name,buy_price,sell_price,date,time,report_price,expiration_date,quantity
 1,apple,Granny Smith,0.50,0.75,2022-01-01,08:00:00,0.60,2022-01-10,100
 2,banana,Cavendish,0.25,0.40,2022-01-01,09:00:00,0.30,2022-01-05,50
 3,carrot,Baby,0.75,1.00,2022-01-01,10:00:00,0.85,2022-01-15,75
