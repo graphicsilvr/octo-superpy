@@ -36,7 +36,7 @@ grpcio==1.53.0
 gTTS==2.3.1
 h11==0.14.0
 httplib2==0.22.0
-idna==3.4
+idna==3.7
 inflection==0.5.1
 iniconfig==2.0.0
 isort==5.12.0
