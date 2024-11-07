@@ -77,6 +77,29 @@ def generate_report():
     return "".join(report_lines)
 
 
+# written this function to generate a profit report / for testing is function is working / check if this function is already used in previous project.
+def generate_profit_report():
+    bought_data = read_csv("data/bought.csv", skip_header=True)
+    sold_data = read_csv("data/sold.csv", skip_header=True)
+
+    # Calculate total cost of goods sold
+    total_cost = sum(float(row[3]) for row in bought_data)
+
+    # Calculate total revenue
+    total_revenue = sum(float(row[3]) for row in sold_data)
+
+    # Calculate profit
+    profit = total_revenue - total_cost
+
+    return {
+        "total_cost": total_cost,
+        "total_revenue": total_revenue,
+        "profit": profit,
+    }
+
+    return "".join(report_lines)
+
+
 def export_to_json(data, file_path):
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
     with open(file_path, "w") as json_file:
