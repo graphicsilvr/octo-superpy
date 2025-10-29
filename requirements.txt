@@ -98,7 +98,7 @@ SQLAlchemy==2.0.9
 swagger-ui-bundle==0.0.9
 tiktoken==0.3.3
 tomlkit==0.11.8
-tqdm==4.65.0
+tqdm==4.66.3
 trio==0.22.0
 trio-websocket==0.10.2
 tweepy==4.13.0
