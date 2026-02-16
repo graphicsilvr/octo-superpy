@@ -1,0 +1,259 @@
+# Main function
+import os
+import json
+import argparse
+from datetime import datetime, timedelta
+
+# Import functions from modules
+from modules.inventory import (
+    handle_buy,
+    handle_sell,
+    handle_report,
+    generate_inventory_report,
+    generate_revenue_report,
+    generate_profit_report,
+    handle_export,
+    handle_visualize,
+    handle_update_price,
+)
+from modules.reporting import (
+    report_inventory,
+    report_revenue,
+    generate_report,
+    export_to_json,
+    export_to_xml,
+)
+from modules.time_management import advance_time, initialize_current_date
+from modules.visualization import plot_sales_over_time
+
+
+def valid_date(s):
+    try:
+        return datetime.strptime(s, "%Y-%m-%d")
+    except ValueError:
+        raise argparse.ArgumentTypeError("Not a valid date: '{0}'.".format(s))
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(
+        description="SuperPy: Inventory Management System."
+    )
+    subparsers = parser.add_subparsers(dest="command", help="Command to execute.")
+    parser.add_argument(
+        "command",
+        choices=[
+            "buy",
+            "sell",
+            "report",
+            "profit",
+            "plot",
+            "advance-time",
+            "export",
+            "visualize",
+            "update-price",
+        ],
+        help="Command to execute.",
+    )
+    parser.add_argument("--product-name", help="Name of the product to update.")
+    parser.add_argument("--new-price", type=float, help="New price of the product.")
+    parser.add_argument(
+        "--start-date",
+        type=valid_date,
+        help="Start date for the report (format: YYYY-MM-DD).",
+    )
+    parser.add_argument(
+        "--end-date",
+        type=valid_date,
+        help="End date for the report (format: YYYY-MM-DD).",
+    )
+    parser.add_argument("--file", help="File to export the report to.", default=None)
+    parser.add_argument("--type", help="Type of report: json or xml.")
+    parser.add_argument("--days", type=int, help="Number of days to advance.")
+    parser.add_argument(
+        "--product-name", help="Name of the product to visualize.", default=None
+    )
+    parser.add_argument(
+        "--date", type=valid_date, help="Date of the sale (format: YYYY-MM-DD)."
+    )
+    parser.add_argument("--quantity", type=int, help="Quantity of the product sold.")
+    parser.add_argument("--customer", help="Customer who bought the product.")
+    parser.add_argument(
+        "--price", type=float, help="Price at which the product was sold."
+    )
+    parser.add_argument("--product", help="Product name.")
+    parser.add_argument("--buy-price", type=float, help="Buy price per product.")
+    parser.add_argument(
+        "--buy-date", type=valid_date, help="Product buy date (format: YYYY-MM-DD)."
+    )
+    parser.add_argument(
+        "--exp-date",
+        type=valid_date,
+        help="Product expiration date (format: YYYY-MM-DD).",
+    )
+    parser.add_argument("--plot", help="Plot sales over time.")
+    parser.add_argument("--visualize", help="Visualize sales data over time.")
+    parser.add_argument("--advance-time", help="Advance the current date.")
+    parser.add_argument("--export", help="Export a report.")
+    parser.add_argument("--update-price", help="Update the price of a product.")
+    parser.add_argument("--profit", help="Calculate the profit.")
+
+    # Define commands and their arguments here correctly before returning the parsed arguments
+    # Example for 'buy' command setup
+    buy_parser = subparsers.add_parser("buy", help="Record a product purchase")
+    buy_parser.add_argument("--product", required=True, help="Product name")
+    buy_parser.add_argument(
+        "--buy-price", type=float, required=True, help="Buy price per product"
+    )
+    buy_parser.add_argument(
+        "--quantity", type=int, default=1, help="Quantity of product"
+    )
+    buy_parser.add_argument(
+        "--buy-date",
+        type=valid_date,
+        required=True,
+        help="Product buy date (format YYYY-MM-DD)",
+    )
+    buy_parser.add_argument(
+        "--exp-date",
+        type=valid_date,
+        required=True,
+        help="Product expiration date (format YYYY-MM-DD)",
+    )
+
+    # Setup for 'sell' command
+    sell_parser = subparsers.add_parser(
+        "sell",
+        help="Record a product sale. Example: superpy.py sell --product-name 'Apple' --price 0.75",
+    )
+    sell_parser.add_argument(
+        "--product-name", required=True, help="Name of the product sold"
+    )
+    sell_parser.add_argument(
+        "--price", type=float, required=True, help="Price at which the product was sold"
+    )
+    sell_parser.add_argument(
+        "--quantity", type=int, help="Quantity of the product sold"
+    )
+    sell_parser.add_argument("--date", help="Date of the sale (format: YYYY-MM-DD)")
+    sell_parser.add_argument("--customer", help="Customer who bought the product")
+
+    # Setup for 'update-price' command
+    update_price_parser = subparsers.add_parser(
+        "update-price", help="Update the price of a product"
+    )
+    update_price_parser.add_argument(
+        "--product-name", required=True, help="Name of the product to update"
+    )
+    update_price_parser.add_argument(
+        "--new-price", type=float, required=True, help="New price of the product"
+    )
+
+    # Setup for 'report' command
+    report_parser = subparsers.add_parser("report", help="Generate a report")
+    report_parser.add_argument(
+        "--type", required=True, help="Type of report: inventory, revenue, or general"
+    )
+    report_parser.add_argument(
+        "--start-date", help="Start date for the report (format: YYYY-MM-DD)"
+    )
+    report_parser.add_argument(
+        "--end-date", help="End date for the report (format: YYYY-MM-DD)"
+    )
+
+    # Setup for 'profit' command
+    profit_parser = subparsers.add_parser("profit", help="Calculate the profit")
+    profit_parser.add_argument(
+        "--start-date", help="Start date for the report (format: YYYY-MM-DD)"
+    )
+    profit_parser.add_argument(
+        "--end-date", help="End date for the report (format: YYYY-MM-DD)"
+    )
+
+    # Plot sales over time
+    plot_parser = subparsers.add_parser("plot", help="Plot sales over time")
+    plot_parser.add_argument(
+        "--start-date", help="Start date for the plot (format: YYYY-MM-DD)"
+    )
+    plot_parser.add_argument(
+        "--end-date", help="End date for the plot (format: YYYY-MM-DD)"
+    )
+    plot_parser.add_argument("--product-name", help="Name of the product to plot")
+
+    # Setup for 'advance-time' command
+    advance_time_parser = subparsers.add_parser(
+        "advance-time", help="Advance the current date"
+    )
+    advance_time_parser.add_argument(
+        "--days", type=int, required=True, help="Number of days to advance"
+    )
+
+    # Setup for 'export' command
+    export_parser = subparsers.add_parser("export", help="Export a report")
+    export_parser.add_argument(
+        "--type", required=True, help="Type of report: json or xml"
+    )
+    export_parser.add_argument(
+        "--file", help="File to export the report to", default=None
+    )
+
+    # Setup for 'visualize' command
+    visualize_parser = subparsers.add_parser(
+        "visualize", help="Visualize sales data over time"
+    )
+    visualize_parser.add_argument(
+        "--start-date",
+        help="Start date for the visualization (YYYY-MM-DD)",
+        default=None,
+    )
+    visualize_parser.add_argument(
+        "--end-date", help="End date for the visualization (YYYY-MM-DD)", default=None
+    )
+
+    visualize_parser.add_argument(
+        "--product-name", help="Name of the product to visualize", default=None
+    )
+
+    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def handle_commands(args):
+    if args.command == "buy":
+        handle_buy(
+            args.product, args.buy_price, args.quantity, args.buy_date, args.exp_date
+        )
+    if args.command == "update-price":
+        handle_update_price(args.product_name, args.new_price)
+    elif args.command == "sell":
+        handle_sell(
+            args.product_name, args.price, args.date, args.quantity, args.customer
+        )
+    elif args.command == "report":
+        if args.type == "inventory":
+            print(report_inventory())
+        elif args.type == "revenue":
+            print(report_revenue(args.start_date, args.end_date))
+        elif args.type == "general":
+            print(generate_report())
+    elif args.command == "advance-time":
+        advance_time(args.days)
+    elif args.command == "export":
+        report_data = report_inventory()  # Adjust based on args.type if necessary
+        if args.type == "json":
+            export_to_json(report_data, args.file)
+        elif args.type == "xml":
+            export_to_xml(report_data, args.file, root_tag="inventory")
+    elif args.command == "visualize":
+        plot_sales_over_time(args.start_date, args.end_date, args.product_name)
+    else:
+        print("Unknown command. Please use --help to see all available commands.")
+
+
+def main():
+    initialize_current_date()
+    args = parse_arguments()
+    handle_commands(args)
+
+
+if __name__ == "__main__":
+    main()

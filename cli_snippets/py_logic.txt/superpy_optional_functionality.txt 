@@ -1,0 +1,61 @@
+"""
+LEGACY LOGIC REFERENCE - OCTO-SUPERPY (2024-2025 Version)
+The following logic has been extracted from the original OOP structure. 
+It is commented out to prevent execution but preserved for future integration 
+of 'bought_id' tracking and manual row-by-row CSV management.
+"""
+
+# import csv
+# from datetime import datetime, timedelta
+
+# --- CLASS-BASED PERSPECTIVE ---
+# Use this if we ever want to move back to a Class-based state management.
+'''
+class LegacySuperpy:
+    def __init__(self, product_name, count, buy_price, expiration_date):
+        self.product_name = product_name
+        self.count = count
+        self.buy_price = buy_price
+        self.expiration_date = expiration_date
+
+    # ID TRACKING LOGIC
+    # Useful for: Precise tracking of specific batches instead of general names.
+    def get_next_id(self, type_str):
+        # Reads the CSV to find the last ID + 1
+        pass 
+'''
+
+# --- GRANULAR SELL LOGIC (BATCH TRACKING) ---
+# This is useful if we need to link every SALE to a specific PURCHASE ID.
+'''
+def legacy_sell_by_id(bought_id, count, sell_price):
+    # 1. Open bought.csv
+    # 2. Loop through and find the EXACT bought_id (row[0])
+    # 3. Verify price and product name
+    # 4. Open sold.csv and write a link: [sold_id, bought_id, date, sell_price]
+    # WHY: This ensures 100% trace-ability for food safety/recalls.
+    pass
+'''
+
+# --- MANUAL INVENTORY AGGREGATION ---
+# Useful if Pandas is unavailable or if we want to build a dictionary-based report.
+'''
+def legacy_report_inventory():
+    inventory = {}
+    # 1. Load all purchases into a dictionary: {product_name: {details}}
+    # 2. Subtract quantities by iterating through sold.csv
+    # 3. Use datetime.strptime to handle the date strings manually.
+    pass
+'''
+
+# --- ARGPARSE DATE-OVERRIDE SNIPPET ---
+# This was your logic for handling --now and --yesterday in the main block.
+'''
+def extract_date_logic(args):
+    # if args.now:
+    #     args.date = datetime.now().strftime('%Y-%m-%d')
+    # elif args.yesterday:
+    #     yesterday = datetime.now() - timedelta(days=1)
+    #     args.date = yesterday.strftime('%Y-%m-%d')
+    pass
+'''

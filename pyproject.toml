@@ -1,0 +1,28 @@
+[project]
+name = "octo-superpy-three"
+version = "0.1.0"
+description = "A sophisticated Supermarket Inventory Management CLI and Flask Web App"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "click>=8.3.1",
+    "flask>=3.1.2",
+    "numpy>=2.1.0",
+    "pandas>=3.0.0",
+    "prettytable>=3.17.0",
+    "python-dotenv>=1.2.1",
+    "rich>=14.3.2",
+    "sqlalchemy>=2.0.46",
+    "tqdm>=4.67.2",
+    "matplotlib>=3.8.0",  # Added to resolve the ModuleNotFoundError
+]
+
+[project.scripts]
+octo-super = "superpy:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["modules", "superpy.py"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,0 +1,92 @@
+"""
+
+# import
+import csv
+import argparse
+
+import transactions
+import datetime
+
+
+def inventory_report(self, now=False, yesterday=False, date=None):
+    records = self.inventory.records
+
+    report = []
+    header = ['Product Name', 'Stock Quantity']
+    report.append(header)
+
+    if now:
+        current_date = datetime.datetime.now().date()
+        for record in records:
+            product_name = record['product_name']
+            stock_quantity = record['stock_quantity']
+            report.append([product_name, stock_quantity])
+
+    elif yesterday:
+        current_date = datetime.datetime.now().date()
+        yesterday_date = current_date - datetime.timedelta(days=1)
+        for record in records:
+            if record['last_updated'] == yesterday_date:
+                product_name = record['product_name']
+                stock_quantity = record['stock_quantity']
+                report.append([product_name, stock_quantity])
+
+    elif date:
+        for record in records:
+            if record['last_updated'] == date:
+                product_name = record['product_name']
+                stock_quantity = record['stock_quantity']
+                report.append([product_name, stock_quantity])
+
+    # Write the report to a CSV file
+    filename = 'inventory_report.csv'
+    with open(filename, 'w') as f:
+        writer = csv.writer(f)
+        for row in report:
+            writer.writerow(row)
+
+    print(f'Inventory report generated and saved to {filename}')
+
+
+def revenue_report(self, now=False, yesterday=False, date=None):
+    records = self.transactions.records
+
+    report = []
+    header = ['Product Name', 'Revenue']
+    report.append(header)
+
+    if now:
+        current_date = datetime.datetime.now().date()
+        for record in records:
+            if record['date'] == current_date:
+                product_name = record['product_name']
+                revenue = record['price'] * record['quantity']
+                report.append([product_name, revenue])
+
+    elif yesterday:
+        current_date = datetime.datetime.now().date()
+        yesterday_date = current_date - datetime.timedelta(days=1)
+        for record in records:
+            if record['date'] == yesterday_date:
+                product_name = record['product_name']
+                revenue = record['price'] * record['quantity']
+                report.append([product_name, revenue])
+
+    elif date:
+        for record in records:
+            if record['date'] == date:
+                product_name = record['product_name']
+                revenue = record['price'] * record['quantity']
+                report.append([product_name, revenue])
+
+    # Write the report to a CSV file
+    filename = 'revenue_report.csv'
+    with open(filename, 'w') as f:
+        writer = csv.writer(f)
+        for row in report:
+            writer.writerow(row)
+
+    print(f'Revenue report generated and saved to {filename}')
+
+    
+"""
