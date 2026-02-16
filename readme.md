@@ -324,6 +324,7 @@ octo-superpy-three/
     ├── revenue.csv         # Revenue summary
     ├── profit.csv          # Profit summary
     └── expired.csv         # Expired products archive
+
 🧪 Testing & Development
 Generate Sample Data
 python -m modules.generate_data
@@ -337,6 +338,7 @@ numpy	Numerical operations
 matplotlib	Data visualization and charts
 rich	Beautiful terminal output (tables, colors)
 argparse	Command-line argument parsing
+
 🔐 Features at a Glance
 ✅ Real-time Inventory Tracking — Know exactly what you have in stock
 ✅ Expiration Management — Alerts for expired and soon-to-expire products
@@ -367,6 +369,7 @@ python superpy.py visualize --dashboard
 
 # 6. Export for accounting
 python superpy.py export --type json --report-type revenue --file daily_report.json
+
 💡 Tips & Best Practices
 Use descriptive product names — makes reports easier to read
 
