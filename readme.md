@@ -1,26 +1,19 @@
-# 🐙 Octo-SuperPy v3.0
+# 📦 Octo-SuperPy v3.0
 
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/)
 
-> A Modern, Feature-Rich Inventory Management System for Supermarkets. Built for speed, accuracy, and beautiful data.
+> **Enterprise Inventory Solutions:** A high-performance management system for supermarket operations. Engineered for precision, scalability, and data-driven decision making.
 
 ---
 
 ## 📖 Table of Contents
-- [🐙 Octo-SuperPy v3.0](#-octo-superpy-v30)
-  - [📖 Table of Contents](#-table-of-contents)
-  - [🌟 What is Octo-SuperPy?](#-what-is-octo-superpy)
-  - [🚀 Installation](#-installation)
-    - [Prerequisites](#prerequisites)
-    - [Setup](#setup)
-- [1. Check current inventory](#1-check-current-inventory)
-- [2. Record a purchase](#2-record-a-purchase)
-- [3. Log a sale](#3-log-a-sale)
-- [4. View daily revenue](#4-view-daily-revenue)
-- [5. Visualize trends](#5-visualize-trends)
-- [6. Export for accounting](#6-export-for-accounting)
+* [What is Octo-SuperPy?](#-what-is-octo-superpy)
+* [Installation & Setup](#-installation)
+* [Operational Workflow](#-core-commands)
+* [Analytical Reporting](#-business-reports)
+* [Data Architecture](#-project-structure)
 
 ---
 
