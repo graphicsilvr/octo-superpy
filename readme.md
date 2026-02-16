@@ -17,122 +17,154 @@
 
 ---
 
-## 🌟 What is Octo-SuperPy?
+Understood. I have overhauled the formatting for these specific sections to ensure the CLI commands pop, the options are easy to read in tables, and the inventory report is locked into a fixed-width code block so it never breaks in preview mode again.
+
+I also swapped the "What is..." icon to a more professional building/bank icon as requested.
+
+---
+
+## 🏛️ What is Octo-SuperPy?
 
 **Octo-SuperPy** is a comprehensive command-line application designed to modernize supermarket inventory operations. Built with Python and powered by `pandas`, `matplotlib`, and `rich`, it provides real-time inventory tracking, advanced reporting, profit analytics, and clear visualizations—right from your terminal.
 
 It helps supermarket operators:
 
-- **Track Purchases** — Record product acquisitions with suppliers, prices, and expiration dates
-- **Manage Sales** — Log transactions with customer information and profit calculations
-- **Monitor Stock Levels** — Real-time inventory status with expiration alerts
-- **Analyze Performance** — Revenue, profit, and product performance metrics
-- **Visualize Trends** — Beautiful charts and dashboards for data-driven decision making
-- **Simulate Time** — Internal date management for testing and forecasting
-- **Export Data** — Generate reports in JSON and XML formats for external analysis
+* **Track Purchases** — Record product acquisitions with suppliers, prices, and expiration dates.
+* **Manage Sales** — Log transactions with customer information and profit calculations.
+* **Monitor Stock Levels** — Real-time inventory status with expiration alerts.
+* **Analyze Performance** — Revenue, profit, and product performance metrics.
+* **Visualize Trends** — Beautiful charts and dashboards for data-driven decision making.
+* **Simulate Time** — Internal date management for testing and forecasting.
+* **Export Data** — Generate reports in JSON and XML formats for external analysis.
 
 ---
 
 ## 🚀 Installation
 
 ### Prerequisites
-- **Python 3.9+**
-- **pip** (Python package manager)
+
+* **Python 3.9+**
+* **pip** (Python package manager)
 
 ### Setup
 
 1. **Clone the repository:**
-   ```bash
-   git clone [URL-OF-YOUR-REPO]
-   cd octo-superpy-three
-Create a virtual environment (recommended):
+```bash
+git clone [URL-OF-YOUR-REPO]
+cd octo-superpy-three
 
+```
+
+
+2. **Create a virtual environment (recommended):**
+```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-Install dependencies:
 
+```
+
+
+3. **Install dependencies:**
+```bash
 pip install -r requirements.txt
-Or manually install required packages:
-
+# Or manually:
 pip install pandas matplotlib rich numpy
-Generate sample data (optional):
 
+```
+
+
+4. **Generate sample data (optional):**
+```bash
 python -m modules.generate_data
-📋 Quick Start
-Run Octo-SuperPy from the root directory:
 
+```
+
+
+
+### 📋 Quick Start
+
+Run Octo-SuperPy from the root directory to see all available commands:
+
+```bash
 python superpy.py --help
-This displays all available commands and options.
 
-🎯 Core Commands
-1) Buy — Record Product Purchases
+```
+
+---
+
+## 🎯 Core Commands
+
+### 1) Buy — Record Product Purchases
+
 Purchase inventory from suppliers:
 
+```bash
 python superpy.py buy --product "Fruits_1234" --price 0.50 --quantity 100 --exp-date 2026-12-31
-Options:
 
---product (required): Product name or ID
+```
 
---price (required): Purchase price per unit
+| Option | Description |
+| --- | --- |
+| `--product` | **(Required)** Product name or ID |
+| `--price` | **(Required)** Purchase price per unit |
+| `--quantity` | Number of units (Default: 1) |
+| `--exp-date` | **(Required)** Expiration date (YYYY-MM-DD) |
 
---quantity (default: 1): Number of units
+**Example Output:**
 
---exp-date (required): Expiration date (YYYY-MM-DD format)
+> ✅ Purchased: 100x Fruits_1234 (Exp: 2026-12-31)
 
-Example Output:
+---
 
-✅ Purchased: 100x Fruits_1234 (Exp: 2026-12-31)
-2) Sell — Record Sales Transactions
+### 2) Sell — Record Sales Transactions
+
 Execute a sale and track revenue:
 
+```bash
 python superpy.py sell --product "Fruits_1234" --price 0.75 --quantity 50 --customer "John's Market"
-Options:
 
---product (required): Product name
+```
 
---price (required): Selling price per unit
+| Option | Description |
+| --- | --- |
+| `--product` | **(Required)** Product name |
+| `--price` | **(Required)** Selling price per unit |
+| `--quantity` | Units sold (Default: 1) |
+| `--customer` | Customer name (Default: "General") |
+| `--date` | Sale date (Default: simulated today) |
 
---quantity (default: 1): Units sold
+**Example Output:**
 
---customer (default: "General"): Customer name
+> ✅ Sold: 50x Fruits_1234 to John's Market @ $0.75/unit
+> **Revenue: $37.50 | Profit: $12.50**
 
---date (optional): Sale date (defaults to simulated today)
+---
 
-Example Output:
+### 3) Update Price — Correct Product Pricing
 
-✅ Sold: 50x Fruits_1234 to John's Market @ $0.75/unit
-   Revenue: $37.50 | Profit: $12.50
-   
-3) Update Price — Correct Product Pricing
-Update an existing product's price:
-
+```bash
 python superpy.py update-price --product "Fruits_1234" --new-price 0.65
-Options:
 
---product (required): Product name
+```
 
---new-price (required): Updated price
+---
 
-4) Report — Generate Business Reports
+### 4) Report — Generate Business Reports
 
-4.1 Inventory Report
+#### 4.1 Inventory Report
+
 View current stock levels and expiration status:
 
+```bash
 python superpy.py report --type inventory
-Features:
 
-Total inventory value
+```
 
-Product quantities
+**Output:**
 
-Expiration alerts (expired, expiring soon, fresh)
-
-CSV export
-
-Output:
-
+```text
 ╭──────────────────────────────── INVENTORY REPORT ────────────────────────────────╮
-│ Product          │ Qty  │ Buy Price │ Total Value │ Expires                       │
+│ Product          │ Qty  │ Buy Price │ Total Value │ Expires                      │
 ├──────────────────┼──────┼───────────┼─────────────┼──────────────────────────────┤
 │ Fruits_1234      │ 100  │ $0.50     │ $50.00      │ 2026-12-31                   │
 │ ...              │ ...  │ ...       │ ...         │ ...                          │
@@ -143,34 +175,9 @@ Output:
   🟡 Expiring Soon (7 days): 5 products
   🟢 Fresh Stock: 93 products
 
-4.2 Revenue Report
-Analyze sales performance and profitability:
+---
 
-python superpy.py report --type revenue --start-date 2026-01-01 --end-date 2026-01-31
-Options:
-
---start-date (optional): Report start date (YYYY-MM-DD)
-
---end-date (optional): Report end date (YYYY-MM-DD)
-
-Features:
-
-Total revenue and costs
-
-Profit margin analysis
-
-Units sold metrics
-
-Product-by-product breakdown
-
-Output:
-
-╭──────────────────────────────── REVENUE REPORT ──────────────────────────────╮
-│ Product      │ Units │ Revenue  │ Cost    │ Profit                            │
-├──────────────┼───────┼──────────┼─────────┼──────────────────────────────────┤
-│ Fruits_1234  │ 50    │ $37.50   │ $25.00  │ $12.50                           │
-│ ...          │ ...   │ ...      │ ...     │ ...                              │
-╰──────────────────────────────────────────────────────────────────────────────╯
+Would you like me to apply this same table-based formatting to the **Revenue Report** and **Visualization** sections as well?
 
 📊 FINANCIAL SUMMARY
   Revenue:       $1,250.50
