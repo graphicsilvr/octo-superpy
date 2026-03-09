@@ -177,145 +177,179 @@ python superpy.py report --type inventory
   Profit:        $375.25
   Margin:        30.0%
 
-5) Visualize — Display Charts and Dashboards
+# 5) Visualize --- Display Charts and Dashboards
+
 Create professional visualizations of your inventory data.
 
-5.1 Sales Over Time
+## 5.1 Sales Over Time
+
+``` bash
 python superpy.py visualize --product "Fruits_1234" --start-date 2026-01-01 --end-date 2026-01-31
+```
+
 Shows sales trends with dual-axis (units sold + average price):
 
-Line chart with markers
+-   Line chart with markers
+-   Optional product filtering
+-   Date range selection
 
-Optional product filtering
+## 5.2 Top Products
 
-Date range selection
-
-5.2 Top Products
+``` bash
 python superpy.py visualize --top-products 10
+```
+
 Bar charts showing:
 
-Top products by units sold
+-   Top products by units sold
+-   Top products by revenue
 
-Top products by revenue
+## 5.3 Profit vs Revenue
 
-5.3 Profit vs Revenue
+``` bash
 python superpy.py visualize --profit-chart
+```
+
 Comparative bar chart for profitability analysis.
 
-5.4 Inventory Health
+## 5.4 Inventory Health
+
+``` bash
 python superpy.py visualize --inventory-health
+```
+
 Displays:
 
-Pie chart of inventory status (active/expiring/expired)
+-   Pie chart of inventory status (active / expiring / expired)
+-   Top products by stock level
 
-Top products by stock level
+## 5.5 Customer Analysis
 
-5.5 Customer Analysis
+``` bash
 python superpy.py visualize --customer-analysis
+```
+
 Shows:
 
-Top customers by revenue
+-   Top customers by revenue
+-   Sales distribution by customer
 
-Sales distribution by customer
+## 5.6 Dashboard
 
-5.6 Dashboard
+``` bash
 python superpy.py visualize --dashboard
-Comprehensive 2x2 dashboard with:
+```
 
-Top products by revenue
+Comprehensive 2×2 dashboard with:
 
-Daily revenue trend
+-   Top products by revenue
+-   Daily revenue trend
+-   Key financial metrics
+-   Inventory status summary
 
-Key financial metrics
+------------------------------------------------------------------------
 
-Inventory status summary
+# 6) Advance Time --- Simulate Date Progression
 
-6) Advance Time — Simulate Date Progression
-Move the internal simulation clock forward (useful for testing and forecasting):
+Move the internal simulation clock forward (useful for testing and
+forecasting).
 
+``` bash
 python superpy.py advance-time --days 30
-Output:
+```
 
-⏰ Time Jumped! Current date is now: 2026-02-01
-7) Export — Save Reports to External Formats
-7.1 Export to JSON
+Example output:
+
+    ⏰ Time Jumped! Current date is now: 2026-02-01
+
+------------------------------------------------------------------------
+
+# 7) Export --- Save Reports to External Formats
+
+## 7.1 Export to JSON
+
+``` bash
 python superpy.py export --type json --report-type inventory --file report.json
-7.2 Export to XML
+```
+
+## 7.2 Export to XML
+
+``` bash
 python superpy.py export --type xml --report-type revenue --file report.xml
+```
 
-📊 Data Management
-Supported CSV Formats
-Octo-SuperPy automatically manages these files in the data/ directory:
+------------------------------------------------------------------------
 
-File Purpose
-inventory.csv	Current stock levels and expiration dates
-bought.csv	Purchase transaction history
-sold.csv	Sales transaction history
-revenue.csv	Revenue summaries by product
-profit.csv	Profit calculations
-expired.csv	Archived expired products
+# 📊 Data Management
 
-🔧 Advanced Features
+## Supported CSV Formats
 
-Date Filtering
+Octo-SuperPy automatically manages these files in the `data/` directory.
+
+  File            Purpose
+  --------------- -------------------------------------------
+  inventory.csv   Current stock levels and expiration dates
+  bought.csv      Purchase transaction history
+  sold.csv        Sales transaction history
+  revenue.csv     Revenue summaries by product
+  profit.csv      Profit calculations
+  expired.csv     Archived expired products
+
+------------------------------------------------------------------------
+
+# 🔧 Advanced Features
+
+## Date Filtering
+
 Most report and visualization commands support date ranges:
 
+``` bash
 python superpy.py report --type revenue --start-date 2026-01-01 --end-date 2026-01-31
 python superpy.py visualize --start-date 2026-01-01 --end-date 2026-01-07 --product "Fruits_1234"
+```
 
-Product Filtering
-Filter visualizations and reports by product (case-insensitive partial matching):
+## Product Filtering
 
+Filter visualizations and reports by product:
+
+``` bash
 python superpy.py visualize --product "apple"
-python superpy.py visualize --product "fruit"  # Matches "Fruits_1234", "Fruits_5678", etc.
+python superpy.py visualize --product "fruit"
+```
 
-Custom Reports
-Generate specific analysis:
+------------------------------------------------------------------------
 
-python superpy.py report --type revenue --top-products 15
-python superpy.py report --type inventory --expired-only
+# 📈 Use Cases
 
-📈 Use Cases
+## Daily Operations
 
-Daily Operations
+``` bash
 python superpy.py report --type inventory
 python superpy.py buy --product "Vegetables_001" --price 2.00 --quantity 50 --exp-date 2026-02-05
-python superpy.py sell --product "Vegetables_001" --price 3.50 --quantity 30 --customer 
-"Local Café"
+python superpy.py sell --product "Vegetables_001" --price 3.50 --quantity 30 --customer "Local Café"
+```
 
-Weekly Analysis
+## Weekly Analysis
+
+``` bash
 python superpy.py report --type revenue --start-date 2026-01-01 --end-date 2026-01-07
 python superpy.py visualize --top-products 10
+```
 
-Monthly Reconciliation
+## Monthly Reconciliation
+
+``` bash
 python superpy.py export --type json --report-type inventory --file january_inventory.json
 python superpy.py export --type xml --report-type revenue --file january_revenue.xml
+```
 
-Forecasting
+## Forecasting
+
+``` bash
 python superpy.py advance-time --days 30
 python superpy.py report --type inventory
 python superpy.py advance-time --days -30
-
-📁 Project Structure
-octo-superpy-three/
-├── superpy.py              # Main CLI entry point
-├── requirements.txt        # Python dependencies
-├── README.md               # This file
-│
-├── modules/
-│   ├── utils.py            # Helper functions (date handling, CSV I/O)
-│   ├── inventory.py        # Buy/sell/update price logic
-│   ├── reporting.py        # Report generation (inventory, revenue, profit)
-│   ├── visualization.py    # Chart and dashboard functions
-│   └── generate_data.py    # Test data generation
-│
-└── data/
-    ├── inventory.csv       # Current stock
-    ├── bought.csv          # Purchase history
-    ├── sold.csv            # Sales history
-    ├── revenue.csv         # Revenue summary
-    ├── profit.csv          # Profit summary
-    └── expired.csv         # Expired products archive
+```
 
 🧪 Testing & Development
 Generate Sample Data
