@@ -171,8 +171,6 @@ python superpy.py report --type inventory
 
 ---
 
-Would you like me to apply this same table-based formatting to the **Revenue Report** and **Visualization** sections as well?
-
 📊 FINANCIAL SUMMARY
   Revenue:       $1,250.50
   Cost:          $875.25
