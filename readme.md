@@ -249,7 +249,7 @@ Comprehensive 2×2 dashboard with:
 
 ------------------------------------------------------------------------
 
-# 6) Advance Time --- Simulate Date Progression
+## 6) Advance Time --- Simulate Date Progression
 
 Move the internal simulation clock forward (useful for testing and
 forecasting).
@@ -264,7 +264,7 @@ Example output:
 
 ------------------------------------------------------------------------
 
-# 7) Export --- Save Reports to External Formats
+## 7) Export --- Save Reports to External Formats
 
 ## 7.1 Export to JSON
 
