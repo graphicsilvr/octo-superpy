@@ -17,12 +17,6 @@
 
 ---
 
-Understood. I have overhauled the formatting for these specific sections to ensure the CLI commands pop, the options are easy to read in tables, and the inventory report is locked into a fixed-width code block so it never breaks in preview mode again.
-
-I also swapped the "What is..." icon to a more professional building/bank icon as requested.
-
----
-
 ## 🏛️ What is Octo-SuperPy?
 
 **Octo-SuperPy** is a comprehensive command-line application designed to modernize supermarket inventory operations. Built with Python and powered by `pandas`, `matplotlib`, and `rich`, it provides real-time inventory tracking, advanced reporting, profit analytics, and clear visualizations—right from your terminal.
